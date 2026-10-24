@@ -1,24 +1,17 @@
 # Retail Payment Reconciliation System
 
-A full-stack enterprise retail payment reconciliation platform built with **ASP.NET 10 Web API** (Backend) and **Angular** (Frontend). Designed to ingest transactions from multiple disparate source systems, enforce composite key constraints, track field-level audits, apply business rules (such as 24-hour revocation windows), and present a real-time reconciliation dashboard.
+## Overview
+A local-only retail payment reconciliation system featuring an **ASP.NET 10** backend API and an **Angular v22** frontend client. It ingests card transactions from multiple mock source systems (Store Uptown, Store Downtown, Online), reconciles records, detects field-level changes and revoked transactions, maintains an audit history, and supports idempotent execution[cite: 1, 2, 4].
 
 ---
 
-## Tech Stack
-* **Backend:** ASP.NET 10 Web API, Entity Framework Core (EF Core), SQLite
-* **Frontend:** Angular (Standalone Components, TypeScript, RxJS), HTML5/CSS3
-* **Development Tooling:** .NET CLI, Angular CLI, Swagger / OpenAPI
-
----
-
-## A. Build Instructions
+## Build & Run Instructions
 
 ### Prerequisites
-* [.NET 10 SDK](https://dotnet.microsoft.com/) installed
-* [Node.js (LTS version)](https://nodejs.org/) installed
+* .NET 10 SDK
+* Node.js (v24+) and Angular CLI
 
-### 1. Build the Backend (.NET API)
-Navigate to the API project directory and build the solution:
-```bash
+### 1. Run the Backend API
+```powershell
 cd RetailPayments.Api
-dotnet build
+dotnet run
