@@ -1,0 +1,61 @@
+<div style="font-family: Arial, sans-serif; max-width: 1200px; margin: 40px auto; padding: 0 20px;">
+  <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+    <div>
+      <h1 style="margin: 0; color: #333;">Retail Payment Reconciliation</h1>
+      <p style="margin: 5px 0 0; color: #666;">Manage multi-source transactions, field audits, and 24-hour revocations</p>
+    </div>
+    <button (click)="triggerImport()" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; font-size: 16px; border-radius: 4px; cursor: pointer;">
+      Run Import & Reconcile
+    </button>
+  </header>
+
+  @if (message) {
+    <div style="background-color: #d4edda; color: #155724; padding: 10px 15px; border-radius: 4px; margin-bottom: 20px;">
+      {{ message }}
+    </div>
+  }
+
+  @if (loading) {
+    <div style="color: #666; margin-bottom: 15px;">Loading data...</div>
+  }
+
+  <div style="overflow-x: auto; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-radius: 6px;">
+    <table style="width: 100%; border-collapse: collapse; text-align: left; background: white;">
+      <thead>
+        <tr style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+          <th style="padding: 12px 15px;">Source System</th>
+          <th style="padding: 12px 15px;">Tx ID</th>
+          <th style="padding: 12px 15px;">Card</th>
+          <th style="padding: 12px 15px;">Location</th>
+          <th style="padding: 12px 15px;">Product</th>
+          <th style="padding: 12px 15px;">Amount</th>
+          <th style="padding: 12px 15px;">Status</th>
+          <th style="padding: 12px 15px;">Tx Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (tx of transactions; track tx.transactionId) {
+          <tr style="border-bottom: 1px solid #dee2e6;">
+            <td style="padding: 12px 15px; font-weight: bold;">{{ tx.sourceSystem }}</td>
+            <td style="padding: 12px 15px;">{{ tx.transactionId }}</td>
+            <td style="padding: 12px 15px;">{{ tx.cardNumber }}</td>
+            <td style="padding: 12px 15px;">{{ tx.locationCode }}</td>
+            <td style="padding: 12px 15px;">{{ tx.productName }}</td>
+            <td style="padding: 12px 15px;">${{ tx.amount.toFixed(2) }}</td>
+            <td style="padding: 12px 15px;">
+              <span [style.color]="tx.status === 'Active' ? 'green' : 'red'" style="font-weight: bold;">
+                {{ tx.status }}
+              </span>
+            </td>
+            <td style="padding: 12px 15px;">{{ tx.transactionTime }}</td>
+          </tr>
+        }
+        @if (transactions.length === 0 && !loading) {
+          <tr>
+            <td colspan="8" style="padding: 20px; text-align: center; color: #888;">No transactions found. Click "Run Import & Reconcile" to sync records.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

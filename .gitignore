@@ -1,0 +1,11 @@
+# .NET
+[Bb]in/
+[Oo]bj/
+*.db
+*.db-shm
+*.db-wal
+
+# Angular / Node
+node_modules/
+dist/
+.angular/

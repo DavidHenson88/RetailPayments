@@ -40,8 +40,10 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular/build:application",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "outputPath": "dist/retail-payments-client",
+            "index": "src/index.html",
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
@@ -53,14 +55,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "security": {
-              "allowedHosts": []
-            },
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -72,8 +67,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
                 }
               ],
               "outputHashing": "all"
@@ -84,10 +79,13 @@
               "sourceMap": true
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "development"
         },
         "serve": {
-          "builder": "@angular/build:dev-server",
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "buildTarget": "RetailPayments.Client:build:production"
